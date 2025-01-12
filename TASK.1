@@ -1,0 +1,282 @@
+int getByte(int number){
+byte ans;
+int temp=number/128;
+if(temp%2==0)
+{
+ans=(byte)(number%128);
+}
+else 
+{
+ans=(byte)(-128+(number%128));
+}
+return ans;
+}
+int getShort(int number)
+{
+short ans;
+int temp=number/32768;
+if(temp%2==0)
+{
+ans=(short)(number%32768);
+}
+else
+
+  ans=(short)(-32768+(number%32768));
+}
+return ans;
+}
+
+int getShort(int number)
+{
+short ans;
+int temp=number/32768;
+if(temp%2==0)
+{
+ans=(short)(number%32768);
+}
+else
+
+  ans=(short)(-32768+(number%32768));
+}
+return ans;
+}
+  
+    int getNumber(int number,String type)
+    {
+    if(type.equalsIgnoreCase("byte"))
+    {
+    byte ans;
+    int temp=number/128;
+    if(temp%2==0)
+    {
+    ans=(byte)(number%128);
+    }
+    else
+    {
+    ans=(byte)(-128+(number%128));
+    }
+    return ans;
+    }else if(type.equalsIgnoreCase("short")
+    {
+    short ans;
+    int temp=number/32768;
+    if(temp%2==0)
+    {
+    ans=(short)(-32768+(number%32768));
+    }
+    return ans;
+    }
+    else
+    {
+    return 0;
+    }
+    }
+        
+//create a function String to XXSystem(String num,String XX) 
+
+     public int getBinary(int num) {
+        int rem = 0;
+        int binary = 0;
+        int places = 1;
+        while (num > 0) {
+            rem = num % 2;
+            num = num / 2;
+            binary = binary + rem * places;
+            places = places * 10;
+        }
+        return binary;
+    }
+
+    
+    public int getOctal(int num) {
+        int rem = 0;
+        int octal = 0;
+        int places = 1;
+        while (num > 0) {
+            rem = num % 8;
+            num = num / 8;
+            octal = octal + rem * places;
+            places = places * 10;
+        }
+        return octal;
+    }
+
+    
+    public int getDecimal(int binary) {
+        int decimal = 0;
+        int places = 0;
+        while (binary > 0) {
+            int rem = binary % 10;
+            decimal = decimal + rem * (int) Math.pow(2, places);
+            binary = binary / 10;
+            places++;
+        }
+        return decimal;
+    }
+
+    
+    public int getBinaryToOctal(int binary) {
+        int decimal = getDecimal(binary);
+        return getOctal(decimal);
+    }
+
+    
+    public int getOctalToBinary(int octal) {
+        int decimal = getOctalToDecimal(octal);
+        return getBinary(decimal);
+    }
+
+    
+    public int getOctalToDecimal(int octal) {
+        int rem = 0;
+        int decimal = 0;
+        int places = 0;
+        while (octal > 0) {
+            rem = octal % 10;
+            decimal = decimal + rem * (int) Math.pow(8, places);
+            octal = octal / 10;
+            places++;
+        }
+        return decimal;
+    }
+
+    
+    public String getDecimalToHexadecimal(int num) {
+        String hexDigits = "0123456789ABCDEF";
+        StringBuilder hex = new StringBuilder();
+        while (num > 0) {
+            int rem = num % 16;
+            hex.insert(0, hexDigits.charAt(rem));
+            num = num / 16;
+        }
+        return hex.toString();
+    }
+
+    
+    public String getBinaryToHexadecimal(int binary) {
+        int decimal = getDecimal(binary);
+        return getDecimalToHexadecimal(decimal);
+    }
+
+    
+    public String getOctalToHexadecimal(int octal) {
+        int decimal = getOctalToDecimal(octal);
+        return getDecimalToHexadecimal(decimal);
+    }
+
+    
+    public int getHexadecimalToDecimal(String hex) {
+        int decimal = 0;
+        int length = hex.length();
+        for (int i = 0; i < length; i++) {
+            char hexDigit = hex.charAt(i);
+            int hexValue = 0;
+            if (hexDigit >= '0' && hexDigit <= '9') {
+                hexValue = hexDigit - '0';
+            } else if (hexDigit >= 'A' && hexDigit <= 'F') {
+                hexValue = hexDigit - 'A' + 10;
+            } else if (hexDigit >= 'a' && hexDigit <= 'f') {
+                hexValue = hexDigit - 'a' + 10;
+            }
+            decimal = decimal * 16 + hexValue;
+        }
+        return decimal;
+    }
+
+    
+    public String getHexadecimalToBinary(String hex) {
+        int decimal = getHexadecimalToDecimal(hex);
+        return getDecimalToBinary(decimal);
+    }
+
+    
+    public String getHexadecimalToOctal(String hex) {
+        int decimal = getHexadecimalToDecimal(hex);
+        return getDecimalToOctal(decimal);
+    }
+
+    
+    public String getDecimalToBinary(int num) {
+        int binary = getBinary(num);
+        return Integer.toString(binary);
+    }
+
+    
+    public String getDecimalToOctal(int num) {
+        return Integer.toString(getOctal(num));
+    }
+
+    
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        BaseConversion converter = new BaseConversion();
+
+        System.out.println("Enter a number:");
+        int number = scanner.nextInt();
+
+        System.out.println("Choose the base to convert from (1: Decimal, 2: Binary, 3: Octal, 4: Hexadecimal):");
+        int baseChoice = scanner.nextInt();
+
+        System.out.println("Choose the base to convert to (1: Binary, 2: Octal, 3: Hexadecimal, 4: Decimal):");
+        int targetBaseChoice = scanner.nextInt();
+
+        switch (baseChoice) {
+            case 1: 
+                if (targetBaseChoice == 1) {
+                    System.out.println("Binary: " + converter.getBinary(number));
+                } else if (targetBaseChoice == 2) {
+                    System.out.println("Octal: " + converter.getOctal(number));
+                } else if (targetBaseChoice == 3) {
+                    System.out.println("Hexadecimal: " + converter.getDecimalToHexadecimal(number));
+                } else {
+                    System.out.println("Decimal: " + number);
+                }
+                break;
+
+            case 2: 
+                if (targetBaseChoice == 1) {
+                    System.out.println("Binary: " + number);
+                } else if (targetBaseChoice == 2) {
+                    System.out.println("Octal: " + converter.getBinaryToOctal(number));
+                } else if (targetBaseChoice == 3) {
+                    System.out.println("Hexadecimal: " + converter.getBinaryToHexadecimal(number));
+                } else {
+                    System.out.println("Decimal: " + converter.getDecimal(number));
+                }
+                break;
+
+            case 3: 
+                if (targetBaseChoice == 1) {
+                    System.out.println("Binary: " + converter.getOctalToBinary(number));
+                } else if (targetBaseChoice == 2) {
+                    System.out.println("Octal: " + number);
+                } else if (targetBaseChoice == 3) {
+                    System.out.println("Hexadecimal: " + converter.getOctalToHexadecimal(number));
+                } else {
+                    System.out.println("Decimal: " + converter.getOctalToDecimal(number));
+                }
+                break;
+
+            case 4: 
+                scanner.nextLine(); 
+                System.out.println("Enter the hexadecimal string:");
+                String hexNumber = scanner.nextLine();
+                if (targetBaseChoice == 1) {
+                    System.out.println("Binary: " + converter.getHexadecimalToBinary(hexNumber));
+                } else if (targetBaseChoice == 2) {
+                    System.out.println("Octal: " + converter.getHexadecimalToOctal(hexNumber));
+                } else if (targetBaseChoice == 3) {
+                    System.out.println("Hexadecimal: " + hexNumber);
+                } else {
+                    System.out.println("Decimal: " + converter.getHexadecimalToDecimal(hexNumber));
+                }
+                break;
+
+            default:
+                System.out.println("Invalid input");
+        }
+        scanner.close();
+    }
+}  
+    
+
